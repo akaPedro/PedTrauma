@@ -12,4 +12,7 @@
 /captures
 .externalNativeBuild
 .cxx
+
+# Firebase: cada dev/CI baixa sua própria cópia no console do Firebase
+/app/google-services.json
 local.properties
