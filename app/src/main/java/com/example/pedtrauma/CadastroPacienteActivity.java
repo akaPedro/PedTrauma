@@ -60,6 +60,28 @@ public class CadastroPacienteActivity extends AppCompatActivity {
         txtHoraAvaliacao.setOnClickListener(v -> escolherHora(false));
 
         findViewById(R.id.btnRegistrarTrauma).setOnClickListener(v -> registrar());
+
+        restaurarEstado(savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@androidx.annotation.NonNull Bundle estado) {
+        super.onSaveInstanceState(estado);
+        estado.putString("sexo", sexoSelecionado);
+        estado.putString("horaOcorrencia", horaOcorrencia);
+        estado.putString("horaAvaliacao", horaAvaliacao);
+    }
+
+    private void restaurarEstado(Bundle estado) {
+        if (estado == null) return;
+        String sexo = estado.getString("sexo");
+        if (sexo != null) selecionarSexo(sexo);
+
+        horaOcorrencia = estado.getString("horaOcorrencia");
+        horaAvaliacao = estado.getString("horaAvaliacao");
+        if (horaOcorrencia != null) txtHoraOcorrencia.setText(horaOcorrencia);
+        if (horaAvaliacao != null) txtHoraAvaliacao.setText(horaAvaliacao);
+        atualizarTempoDecorrido();
     }
 
     private void selecionarSexo(String sexo) {

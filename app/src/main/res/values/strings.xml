@@ -30,13 +30,11 @@
     <string name="erro_email_em_uso">Este email já está cadastrado</string>
 
     <!-- Home -->
-    <string name="bem_vindo">Bem-vindo(a), %1$s!</string>
     <string name="btn_sair">Sair</string>
     <string name="btn_novo_paciente">Novo Paciente</string>
     <string name="btn_paciente_registrado">Paciente Registrado</string>
     <string name="desc_menu">Abrir menu</string>
     <string name="desc_perfil">Abrir perfil</string>
-    <string name="em_breve">Em breve!</string>
 
     <!-- Boas-vindas / Sobre -->
     <string name="bem_vindo_titulo">Bem vindo ao\nPedTrauma</string>

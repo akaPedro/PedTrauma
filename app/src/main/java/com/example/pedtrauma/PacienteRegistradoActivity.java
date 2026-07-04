@@ -20,8 +20,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * Nova avaliação de um paciente já cadastrado (2ª tela do mockup).
@@ -36,7 +38,10 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
 
     private final List<String> ids = new ArrayList<>();
     private final List<Paciente> pacientes = new ArrayList<>();
+    /** Rótulo exibido no autocomplete -> índice na lista (trata nomes repetidos). */
+    private final Map<String, Integer> indicePorRotulo = new HashMap<>();
     private int selecionado = -1;
+    private String idPendenteRestauracao = null;
 
     private String horaOcorrencia = null;
     private String horaAvaliacao = null;
@@ -62,7 +67,27 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
 
         findViewById(R.id.btnRegistrarTrauma).setOnClickListener(v -> registrar());
 
+        restaurarEstado(savedInstanceState);
         carregarPacientes();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@androidx.annotation.NonNull Bundle estado) {
+        super.onSaveInstanceState(estado);
+        estado.putString("horaOcorrencia", horaOcorrencia);
+        estado.putString("horaAvaliacao", horaAvaliacao);
+        estado.putString("pacienteId", selecionado >= 0 ? ids.get(selecionado) : null);
+    }
+
+    private void restaurarEstado(Bundle estado) {
+        if (estado == null) return;
+        horaOcorrencia = estado.getString("horaOcorrencia");
+        horaAvaliacao = estado.getString("horaAvaliacao");
+        if (horaOcorrencia != null) txtHoraOcorrencia.setText(horaOcorrencia);
+        if (horaAvaliacao != null) txtHoraAvaliacao.setText(horaAvaliacao);
+        atualizarTempoDecorrido();
+        // reaplicado quando a lista de pacientes terminar de carregar
+        idPendenteRestauracao = estado.getString("pacienteId");
     }
 
     private void carregarPacientes() {
@@ -77,38 +102,51 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
                 .addOnSuccessListener(snapshot -> {
                     ids.clear();
                     pacientes.clear();
-                    List<String> nomes = new ArrayList<>();
+                    indicePorRotulo.clear();
+                    List<String> rotulos = new ArrayList<>();
                     for (QueryDocumentSnapshot doc : snapshot) {
                         Paciente p = doc.toObject(Paciente.class);
                         ids.add(doc.getId());
                         pacientes.add(p);
-                        nomes.add(p.getNome());
+
+                        // Nomes repetidos ganham a idade (e um número) no rótulo
+                        String rotulo = p.getNome();
+                        if (indicePorRotulo.containsKey(rotulo)) {
+                            rotulo = p.getNome() + " - " + p.getIdade() + " anos";
+                        }
+                        int sequencia = 2;
+                        while (indicePorRotulo.containsKey(rotulo)) {
+                            rotulo = p.getNome() + " (" + sequencia++ + ")";
+                        }
+                        indicePorRotulo.put(rotulo, pacientes.size() - 1);
+                        rotulos.add(rotulo);
                     }
-                    if (nomes.isEmpty()) {
+                    if (rotulos.isEmpty()) {
                         Toast.makeText(this, R.string.nenhum_paciente, Toast.LENGTH_LONG).show();
                         return;
                     }
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                            this, android.R.layout.simple_dropdown_item_1line, nomes);
+                            this, android.R.layout.simple_dropdown_item_1line, rotulos);
                     edtBuscaPaciente.setAdapter(adapter);
                     edtBuscaPaciente.setThreshold(1);
                     edtBuscaPaciente.setOnItemClickListener((parent, view, pos, id) -> {
-                        String nome = (String) parent.getItemAtPosition(pos);
-                        selecionarPorNome(nome);
+                        Integer indice = indicePorRotulo.get(
+                                (String) parent.getItemAtPosition(pos));
+                        selecionado = indice == null ? -1 : indice;
+                        mostrarUltimaAvaliacao();
                     });
-                });
-    }
 
-    private void selecionarPorNome(String nome) {
-        selecionado = -1;
-        for (int i = 0; i < pacientes.size(); i++) {
-            if (pacientes.get(i).getNome().equals(nome)) {
-                selecionado = i;
-                break;
-            }
-        }
-        mostrarUltimaAvaliacao();
+                    // Restaura a seleção após girar a tela
+                    if (idPendenteRestauracao != null) {
+                        int indice = ids.indexOf(idPendenteRestauracao);
+                        idPendenteRestauracao = null;
+                        if (indice >= 0) {
+                            selecionado = indice;
+                            mostrarUltimaAvaliacao();
+                        }
+                    }
+                });
     }
 
     private void mostrarUltimaAvaliacao() {

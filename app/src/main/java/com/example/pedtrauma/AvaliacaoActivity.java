@@ -72,6 +72,7 @@ public class AvaliacaoActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> finish());
 
         Arrays.fill(respostas, SEM_RESPOSTA);
+        restaurarEstado(savedInstanceState);
 
         pager = findViewById(R.id.pagerPerguntas);
         layoutIndicadores = findViewById(R.id.layoutIndicadores);
@@ -84,6 +85,29 @@ public class AvaliacaoActivity extends AppCompatActivity {
                 atualizarIndicadores(position);
             }
         });
+    }
+
+    // ---------- estado (protege a avaliação ao recriar a tela) ----------
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle estado) {
+        super.onSaveInstanceState(estado);
+        estado.putIntArray("respostas", respostas);
+        estado.putInt("exameImagem", exameImagem == null ? -1 : (exameImagem ? 1 : 0));
+        estado.putString("achados", achados);
+        estado.putString("observacoes", observacoes);
+    }
+
+    private void restaurarEstado(Bundle estado) {
+        if (estado == null) return;
+        int[] salvas = estado.getIntArray("respostas");
+        if (salvas != null && salvas.length == respostas.length) {
+            System.arraycopy(salvas, 0, respostas, 0, respostas.length);
+        }
+        int exame = estado.getInt("exameImagem", -1);
+        exameImagem = exame == -1 ? null : exame == 1;
+        achados = estado.getString("achados", "");
+        observacoes = estado.getString("observacoes", "");
     }
 
     // ---------- pontuação ----------
@@ -282,13 +306,15 @@ public class AvaliacaoActivity extends AppCompatActivity {
 
             grupo.setOnCheckedChangeListener((g, checkedId) -> {
                 if (checkedId == -1) return;
+                int posicaoAtual = getBindingAdapterPosition();
+                if (posicaoAtual == RecyclerView.NO_POSITION) return;
                 int escolha = checkedId == R.id.opcao0 ? 0
                         : checkedId == R.id.opcao1 ? 1 : 2;
-                respostas[getBindingAdapterPosition()] = escolha;
+                respostas[posicaoAtual] = escolha;
                 notificarResultado(); // pontuação atualiza automaticamente
                 // avança para a próxima pergunta
                 pager.postDelayed(() ->
-                        pager.setCurrentItem(getBindingAdapterPosition() + 1, true), 250);
+                        pager.setCurrentItem(posicaoAtual + 1, true), 250);
             });
         }
     }
