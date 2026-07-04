@@ -32,7 +32,7 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
 
     private AutoCompleteTextView edtBuscaPaciente;
     private EditText edtTipoTrauma;
-    private TextView txtHoraOcorrencia, txtHoraAvaliacao, cartaoUltimaAvaliacao;
+    private TextView txtHoraOcorrencia, txtHoraAvaliacao, txtTempoDecorrido, cartaoUltimaAvaliacao;
 
     private final List<String> ids = new ArrayList<>();
     private final List<Paciente> pacientes = new ArrayList<>();
@@ -54,6 +54,7 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
         edtTipoTrauma = findViewById(R.id.edtTipoTrauma);
         txtHoraOcorrencia = findViewById(R.id.txtHoraOcorrencia);
         txtHoraAvaliacao = findViewById(R.id.txtHoraAvaliacao);
+        txtTempoDecorrido = findViewById(R.id.txtTempoDecorrido);
         cartaoUltimaAvaliacao = findViewById(R.id.cartaoUltimaAvaliacao);
 
         txtHoraOcorrencia.setOnClickListener(v -> escolherHora(true));
@@ -138,7 +139,19 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
                 horaAvaliacao = texto;
                 txtHoraAvaliacao.setText(texto);
             }
+            atualizarTempoDecorrido();
         }, 12, 0, true).show();
+    }
+
+    private void atualizarTempoDecorrido() {
+        long minutos = CadastroPacienteActivity
+                .calcularTempoDecorrido(horaOcorrencia, horaAvaliacao);
+        if (minutos >= 0) {
+            txtTempoDecorrido.setText(getString(R.string.tempo_decorrido, minutos));
+            txtTempoDecorrido.setVisibility(View.VISIBLE);
+        } else {
+            txtTempoDecorrido.setVisibility(View.GONE);
+        }
     }
 
     private void registrar() {

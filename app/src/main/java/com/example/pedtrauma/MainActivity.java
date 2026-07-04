@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.itemPacientes) {
                 startActivity(new Intent(this, PacienteRegistradoActivity.class));
             } else if (id == R.id.itemSobre) {
-                mostrarDialogoBemVindo();
+                startActivity(new Intent(this, SobreActivity.class));
             } else if (id == R.id.itemSair) {
                 sair();
             }

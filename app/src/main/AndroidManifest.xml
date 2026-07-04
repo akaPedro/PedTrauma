@@ -57,6 +57,10 @@
         <activity
             android:name=".HistoricoActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".SobreActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
