@@ -29,7 +29,79 @@
     <string name="erro_cadastro">Erro ao cadastrar: %1$s</string>
     <string name="erro_email_em_uso">Este email já está cadastrado</string>
 
-    <!-- Home (temporária) -->
+    <!-- Home -->
     <string name="bem_vindo">Bem-vindo(a), %1$s!</string>
     <string name="btn_sair">Sair</string>
+    <string name="btn_novo_paciente">Novo Paciente</string>
+    <string name="btn_paciente_registrado">Paciente Registrado</string>
+    <string name="desc_menu">Abrir menu</string>
+    <string name="desc_perfil">Abrir perfil</string>
+    <string name="em_breve">Em breve!</string>
+
+    <!-- Boas-vindas / Sobre -->
+    <string name="bem_vindo_titulo">Bem vindo ao\nPedTrauma</string>
+    <string name="bem_vindo_texto">O PedTrauma, é um aplicativo que realiza o cálculo do Escore do Trauma Pediátrico (PTS).
+Esse, por sua vez, possui a capacidade de predizer o desfecho, como morbidade e
+mortalidade, além de prever a sobrevida, independentemente do mecanismo da lesão.</string>
+    <string name="btn_ok">Ok</string>
+
+    <!-- Menu lateral -->
+    <string name="menu_historico">Histórico</string>
+    <string name="menu_pacientes">Pacientes</string>
+    <string name="menu_sobre">Sobre</string>
+
+    <!-- Perfil -->
+    <string name="titulo_perfil">Perfil</string>
+    <string name="btn_editar_informacoes">Editar informações</string>
+    <string name="btn_salvar">Salvar</string>
+    <string name="perfil_atualizado">Informações atualizadas!</string>
+    <string name="erro_atualizar">Erro ao atualizar: %1$s</string>
+    <string name="desc_editar_foto">Editar foto</string>
+    <string name="desc_voltar">Voltar</string>
+
+    <!-- Cadastro de paciente -->
+    <string name="titulo_cadastro">Cadastro</string>
+    <string name="hint_nome_paciente">Nome</string>
+    <string name="rotulo_idade">Idade:</string>
+    <string name="rotulo_sexo">Sexo</string>
+    <string name="sexo_masculino">Masculino</string>
+    <string name="sexo_feminino">Feminino</string>
+    <string name="rotulo_tipo_trauma">Tipo de trauma:</string>
+    <string name="rotulo_hora_ocorrencia">Hora da ocorrência:</string>
+    <string name="rotulo_hora_avaliacao">Hora da avaliação:</string>
+    <string name="hora_vazia">__:__</string>
+    <string name="tempo_decorrido">Tempo decorrido: %1$d minutos</string>
+    <string name="btn_registrar_trauma">Registrar trauma</string>
+    <string name="erro_selecione_sexo">Selecione o sexo</string>
+    <string name="erro_informe_horas">Informe as horas</string>
+
+    <!-- Paciente registrado -->
+    <string name="titulo_paciente_registrado">Paciente Registrado</string>
+    <string name="rotulo_ultima_avaliacao">Ultima avaliação:</string>
+    <string name="erro_selecione_paciente">Selecione um paciente cadastrado</string>
+    <string name="nenhum_paciente">Nenhum paciente cadastrado ainda</string>
+    <string name="sem_avaliacao">Sem avaliação registrada</string>
+
+    <!-- Avaliação (carrossel PTS) -->
+    <string name="titulo_trauma">Trauma</string>
+    <string name="interrogacao">?</string>
+    <string name="rotulo_pontuacao">Pontuação:</string>
+    <string name="pontuacao_pendente">--</string>
+    <string name="pergunta_exame_imagem">Exame de imagem?</string>
+    <string name="opcao_sim">Sim</string>
+    <string name="opcao_nao">Não</string>
+    <string name="hint_achados">Descreva os achados do exame</string>
+    <string name="aviso_hemorragia">Atenção, o PTS ≤ 8, convulsões, fraturas e pouca idade pode indicar um quadro de hemorragia intracraniana.</string>
+    <string name="btn_salvar_avaliacao">Salvar</string>
+    <string name="confirmar_salvar">Deseja salvar esta avaliação?</string>
+    <string name="avaliacao_salva">Avaliação salva!</string>
+    <string name="erro_salvar_avaliacao">Erro ao salvar: %1$s</string>
+    <string name="erro_responda_tudo">Responda todas as perguntas e informe se realizou exame de imagem</string>
+    <string name="interpretacao_maior_potencial">Maior potencial de mortalidade associado</string>
+    <string name="interpretacao_menor_potencial">Menor potencial de mortalidade associado</string>
+
+    <!-- Histórico -->
+    <string name="titulo_historico">Histórico</string>
+    <string name="nenhuma_avaliacao">Nenhuma avaliação registrada ainda</string>
+    <string name="cartao_paciente">Paciente %1$s - %2$d anos\n%3$s\nNota: %4$d\n%5$s</string>
 </resources>

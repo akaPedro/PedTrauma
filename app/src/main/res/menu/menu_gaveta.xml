@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/grupoPrincipal">
+        <item
+            android:id="@+id/itemHistorico"
+            android:title="@string/menu_historico" />
+        <item
+            android:id="@+id/itemPacientes"
+            android:title="@string/menu_pacientes" />
+    </group>
+
+    <group android:id="@+id/grupoRodape">
+        <item
+            android:id="@+id/itemSobre"
+            android:title="@string/menu_sobre" />
+        <item
+            android:id="@+id/itemSair"
+            android:title="@string/btn_sair" />
+    </group>
+</menu>

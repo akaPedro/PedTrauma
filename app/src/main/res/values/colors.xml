@@ -8,4 +8,7 @@
     <color name="vermelho_pedtrauma">#D42027</color>
     <color name="fundo_cinza">#DBDBDB</color>
     <color name="texto_escuro">#1A1A1A</color>
+    <color name="fundo_cartao">#F2F2F2</color>
+    <color name="verde_pedtrauma">#14604B</color>
+    <color name="cinza_indicador">#9E9E9E</color>
 </resources>

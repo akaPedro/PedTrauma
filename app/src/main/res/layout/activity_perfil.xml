@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fundo_cinza"
+    android:orientation="vertical"
+    tools:context=".PerfilActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/black"
+        app:navigationIcon="@drawable/ic_voltar"
+        app:navigationContentDescription="@string/desc_voltar"
+        app:title="@string/titulo_perfil"
+        app:titleTextColor="@color/white"
+        app:titleCentered="true" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="48dp">
+
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:contentDescription="@string/desc_logo"
+            android:src="@drawable/canvas" />
+
+        <ImageView
+            android:id="@+id/btnEditarFoto"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/bg_circulo_azul"
+            android:contentDescription="@string/desc_editar_foto"
+            android:padding="9dp"
+            android:src="@drawable/ic_editar" />
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/edtNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="64dp"
+        android:autofillHints="name"
+        android:backgroundTint="@color/texto_escuro"
+        android:enabled="false"
+        android:gravity="center"
+        android:hint="@string/hint_nome"
+        android:inputType="textPersonName|textCapWords"
+        android:textColor="@color/texto_escuro"
+        android:textColorHint="@color/texto_escuro"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtRegistro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="64dp"
+        android:backgroundTint="@color/texto_escuro"
+        android:enabled="false"
+        android:gravity="center"
+        android:hint="@string/hint_registro"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textColor="@color/texto_escuro"
+        android:textColorHint="@color/texto_escuro"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnEditar"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_botao_azul"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:text="@string/btn_editar_informacoes"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/progressPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:visibility="gone" />
+
+</LinearLayout>

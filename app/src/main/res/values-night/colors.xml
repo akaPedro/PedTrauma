@@ -7,4 +7,7 @@
     <color name="fundo_cinza">#15171C</color>
     <color name="texto_escuro">#ECEDEE</color>
     <color name="superficie_escura">#1E2128</color>
+    <color name="fundo_cartao">#1E2128</color>
+    <color name="verde_pedtrauma">#1E7A62</color>
+    <color name="cinza_indicador">#6F7378</color>
 </resources>

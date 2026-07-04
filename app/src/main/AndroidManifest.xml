@@ -37,6 +37,26 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".PerfilActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".CadastroPacienteActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".PacienteRegistradoActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AvaliacaoActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".HistoricoActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

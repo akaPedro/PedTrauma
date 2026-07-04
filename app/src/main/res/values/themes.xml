@@ -14,6 +14,12 @@
 
     <style name="Theme.PedTrauma" parent="Base.Theme.PedTrauma" />
 
+    <!-- Texto dos itens do menu lateral (gaveta preta do mockup) -->
+    <style name="TextoMenuGaveta" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <!-- Campo de senha com sublinhado e ícone de visibilidade (olho) -->
     <style name="CampoSenha" parent="Widget.Material3.TextInputLayout.FilledBox">
         <item name="boxBackgroundColor">@android:color/transparent</item>

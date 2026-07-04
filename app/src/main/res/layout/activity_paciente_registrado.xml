@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fundo_cinza"
+    android:orientation="vertical"
+    tools:context=".PacienteRegistradoActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/black"
+        app:navigationIcon="@drawable/ic_voltar"
+        app:navigationContentDescription="@string/desc_voltar"
+        app:title="@string/titulo_paciente_registrado"
+        app:titleTextColor="@color/white"
+        app:titleCentered="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/edtBuscaPaciente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/texto_escuro"
+                android:hint="@string/hint_nome_paciente"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName|textCapWords"
+                android:textColor="@color/texto_escuro"
+                android:textColorHint="@color/texto_escuro"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="@string/rotulo_tipo_trauma"
+                android:textColor="@color/texto_escuro"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edtTipoTrauma"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/fundo_cartao"
+                android:gravity="top|start"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine|textCapSentences"
+                android:padding="12dp"
+                android:textColor="@color/texto_escuro" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rotulo_hora_ocorrencia"
+                    android:textColor="@color/texto_escuro"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtHoraOcorrencia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:padding="8dp"
+                    android:text="@string/hora_vazia"
+                    android:textColor="@color/texto_escuro"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rotulo_hora_avaliacao"
+                    android:textColor="@color/texto_escuro"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtHoraAvaliacao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:padding="8dp"
+                    android:text="@string/hora_vazia"
+                    android:textColor="@color/texto_escuro"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/rotulo_ultima_avaliacao"
+                android:textColor="@color/texto_escuro"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cartaoUltimaAvaliacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_cartao_azul"
+                android:lineSpacingExtra="2dp"
+                android:padding="16dp"
+                android:text="@string/sem_avaliacao"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnRegistrarTrauma"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_botao_vermelho"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:text="@string/btn_registrar_trauma"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
