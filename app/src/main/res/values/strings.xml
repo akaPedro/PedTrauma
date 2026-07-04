@@ -79,7 +79,9 @@ mortalidade, além de prever a sobrevida, independentemente do mecanismo da les�
     <string name="titulo_pacientes">Pacientes</string>
     <string name="paciente_nome_idade">%1$s - %2$d anos</string>
     <string name="ultima_avaliacao_resumo">Última avaliação: %1$s\nNota: %2$d - %3$s</string>
-    <string name="dica_nova_avaliacao">Toque em um paciente para registrar uma nova avaliação</string>
+    <string name="dica_nova_avaliacao">Toque em um paciente para ver as opções</string>
+    <string name="opcao_ver_avaliacoes">Visualizar avaliações anteriores</string>
+    <string name="opcao_nova_avaliacao">Fazer nova avaliação</string>
 
     <!-- Paciente registrado -->
     <string name="titulo_paciente_registrado">Paciente Registrado</string>

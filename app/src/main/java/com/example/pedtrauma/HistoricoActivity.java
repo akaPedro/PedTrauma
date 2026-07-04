@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -42,10 +43,15 @@ import java.util.Locale;
  */
 public class HistoricoActivity extends AppCompatActivity {
 
+    /** Extras opcionais: mostram só as avaliações de um paciente. */
+    public static final String EXTRA_PACIENTE_ID = "pacienteId";
+    public static final String EXTRA_PACIENTE_NOME = "pacienteNome";
+
     private static final String AUTORIDADE_PROVIDER = "com.example.pedtrauma.fileprovider";
 
     private final List<Avaliacao> avaliacoes = new ArrayList<>();
     private HistoricoAdapter adapter;
+    private String filtroPacienteId;
 
     private Usuario profissional;
     private File arquivoPendente;
@@ -59,6 +65,13 @@ public class HistoricoActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
+
+        // Filtro opcional: avaliações anteriores de um paciente específico
+        filtroPacienteId = getIntent().getStringExtra(EXTRA_PACIENTE_ID);
+        String nomePaciente = getIntent().getStringExtra(EXTRA_PACIENTE_NOME);
+        if (nomePaciente != null) {
+            toolbar.setTitle(nomePaciente);
+        }
 
         RecyclerView lista = findViewById(R.id.listaHistorico);
         lista.setLayoutManager(new LinearLayoutManager(this));
@@ -91,15 +104,28 @@ public class HistoricoActivity extends AppCompatActivity {
         String uid = FirebaseAuth.getInstance().getUid();
         if (uid == null) return;
 
-        FirebaseFirestore.getInstance()
+        Query consulta = FirebaseFirestore.getInstance()
                 .collection("usuarios").document(uid)
-                .collection("avaliacoes")
-                .orderBy("criadoEm", Query.Direction.DESCENDING)
-                .get()
+                .collection("avaliacoes");
+
+        // Com filtro de paciente, a ordenação é feita localmente para
+        // não exigir índice composto no Firestore.
+        consulta = filtroPacienteId != null
+                ? consulta.whereEqualTo("pacienteId", filtroPacienteId)
+                : consulta.orderBy("criadoEm", Query.Direction.DESCENDING);
+
+        consulta.get()
                 .addOnSuccessListener(snapshot -> {
                     avaliacoes.clear();
                     for (QueryDocumentSnapshot doc : snapshot) {
                         avaliacoes.add(doc.toObject(Avaliacao.class));
+                    }
+                    if (filtroPacienteId != null) {
+                        Collections.sort(avaliacoes, (a, b) -> {
+                            if (a.getCriadoEm() == null) return 1;
+                            if (b.getCriadoEm() == null) return -1;
+                            return b.getCriadoEm().compareTo(a.getCriadoEm());
+                        });
                     }
                     adapter.notifyDataSetChanged();
                     findViewById(R.id.txtVazio).setVisibility(

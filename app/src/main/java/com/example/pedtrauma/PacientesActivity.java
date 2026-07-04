@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -78,6 +79,33 @@ public class PacientesActivity extends AppCompatActivity {
                 });
     }
 
+    private void mostrarOpcoes(int posicao) {
+        Paciente paciente = pacientes.get(posicao);
+        String pacienteId = ids.get(posicao);
+
+        String[] opcoes = {
+                getString(R.string.opcao_ver_avaliacoes),
+                getString(R.string.opcao_nova_avaliacao)
+        };
+        new AlertDialog.Builder(this)
+                .setTitle(paciente.getNome())
+                .setItems(opcoes, (dialogo, escolha) -> {
+                    if (escolha == 0) {
+                        verAvaliacoesAnteriores(pacienteId, paciente.getNome());
+                    } else {
+                        abrirNovaAvaliacao(pacienteId);
+                    }
+                })
+                .show();
+    }
+
+    private void verAvaliacoesAnteriores(String pacienteId, String nome) {
+        Intent intent = new Intent(this, HistoricoActivity.class);
+        intent.putExtra(HistoricoActivity.EXTRA_PACIENTE_ID, pacienteId);
+        intent.putExtra(HistoricoActivity.EXTRA_PACIENTE_NOME, nome);
+        startActivity(intent);
+    }
+
     private void abrirNovaAvaliacao(String pacienteId) {
         Intent intent = new Intent(this, PacienteRegistradoActivity.class);
         intent.putExtra(PacienteRegistradoActivity.EXTRA_PACIENTE_ID, pacienteId);
@@ -113,7 +141,7 @@ public class PacientesActivity extends AppCompatActivity {
             holder.itemView.setOnClickListener(v -> {
                 int pos = holder.getBindingAdapterPosition();
                 if (pos != RecyclerView.NO_POSITION) {
-                    abrirNovaAvaliacao(ids.get(pos));
+                    mostrarOpcoes(pos);
                 }
             });
         }
