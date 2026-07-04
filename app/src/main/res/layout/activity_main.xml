@@ -15,7 +15,7 @@
         android:background="@color/fundo_cinza"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -23,6 +23,7 @@
             app:navigationIcon="@drawable/ic_menu"
             app:navigationContentDescription="@string/desc_menu"
             app:title="@string/app_name"
+            app:titleCentered="true"
             app:titleTextColor="@color/white" />
 
         <Button

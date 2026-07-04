@@ -18,6 +18,9 @@ public class Usuario {
     private String cpf;
     private String email;
 
+    /** Foto de perfil em JPEG comprimido, codificada em Base64. */
+    private String fotoBase64;
+
     @ServerTimestamp
     private Date criadoEm;
 
@@ -42,6 +45,9 @@ public class Usuario {
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+
+    public String getFotoBase64() { return fotoBase64; }
+    public void setFotoBase64(String fotoBase64) { this.fotoBase64 = fotoBase64; }
 
     public Date getCriadoEm() { return criadoEm; }
     public void setCriadoEm(Date criadoEm) { this.criadoEm = criadoEm; }

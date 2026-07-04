@@ -55,6 +55,8 @@ mortalidade, além de prever a sobrevida, independentemente do mecanismo da les�
     <string name="perfil_atualizado">Informações atualizadas!</string>
     <string name="erro_atualizar">Erro ao atualizar: %1$s</string>
     <string name="desc_editar_foto">Editar foto</string>
+    <string name="foto_atualizada">Foto de perfil atualizada!</string>
+    <string name="erro_foto">Erro ao carregar a foto: %1$s</string>
     <string name="desc_voltar">Voltar</string>
 
     <!-- Cadastro de paciente -->

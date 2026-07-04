@@ -3,7 +3,9 @@ package com.example.pedtrauma;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
@@ -14,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
  * Tela principal (após login).
@@ -45,6 +48,32 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             mostrarDialogoBemVindo();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        carregarFotoPerfil(); // atualiza ao voltar da tela de Perfil
+    }
+
+    /** Mostra a foto do usuário no ícone de perfil da toolbar. */
+    private void carregarFotoPerfil() {
+        String uid = FirebaseAuth.getInstance().getUid();
+        if (uid == null) return;
+
+        FirebaseFirestore.getInstance()
+                .collection("usuarios").document(uid)
+                .get()
+                .addOnSuccessListener(doc -> {
+                    Usuario usuario = doc.toObject(Usuario.class);
+                    if (usuario == null) return;
+                    Drawable foto = Ui.fotoCircular(getResources(), usuario.getFotoBase64());
+                    if (foto == null) return;
+
+                    Toolbar toolbar = findViewById(R.id.toolbar);
+                    MenuItem itemPerfil = toolbar.getMenu().findItem(R.id.itemPerfil);
+                    if (itemPerfil != null) itemPerfil.setIcon(foto);
+                });
     }
 
     private void configurarToolbar() {
