@@ -14,10 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-/**
- * Tela de login (mockup do meio).
- * Autentica com Firebase Authentication (email/senha).
- */
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText edtEmail, edtSenha;

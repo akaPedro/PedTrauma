@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:indeterminate="false"
         android:max="100"
-        android:progressTint="@color/black"
+        android:progressTint="@color/texto_escuro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imgLogo"
