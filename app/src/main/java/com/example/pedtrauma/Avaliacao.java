@@ -29,6 +29,7 @@ public class Avaliacao {
 
     private Boolean exameImagem;
     private String achados;
+    private String observacoes;
 
     @ServerTimestamp
     private Date criadoEm;
@@ -74,6 +75,9 @@ public class Avaliacao {
 
     public String getAchados() { return achados; }
     public void setAchados(String achados) { this.achados = achados; }
+
+    public String getObservacoes() { return observacoes; }
+    public void setObservacoes(String observacoes) { this.observacoes = observacoes; }
 
     public Date getCriadoEm() { return criadoEm; }
     public void setCriadoEm(Date criadoEm) { this.criadoEm = criadoEm; }

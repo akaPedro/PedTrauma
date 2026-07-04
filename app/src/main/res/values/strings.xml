@@ -91,6 +91,7 @@ mortalidade, além de prever a sobrevida, independentemente do mecanismo da les�
     <string name="opcao_sim">Sim</string>
     <string name="opcao_nao">Não</string>
     <string name="hint_achados">Descreva os achados do exame</string>
+    <string name="hint_observacoes">Observações (opcional)</string>
     <string name="aviso_hemorragia">Atenção, o PTS ≤ 8, convulsões, fraturas e pouca idade pode indicar um quadro de hemorragia intracraniana.</string>
     <string name="btn_salvar_avaliacao">Salvar</string>
     <string name="confirmar_salvar">Deseja salvar esta avaliação?</string>
@@ -109,4 +110,13 @@ mortalidade, além de prever a sobrevida, independentemente do mecanismo da les�
     <string name="titulo_historico">Histórico</string>
     <string name="nenhuma_avaliacao">Nenhuma avaliação registrada ainda</string>
     <string name="cartao_paciente">Paciente %1$s - %2$d anos\n%3$s\nNota: %4$d\n%5$s</string>
+    <string name="toque_para_exportar">Toque em uma avaliação para exportar</string>
+
+    <!-- Exportação em PDF -->
+    <string name="exportar_titulo">Exportar avaliação</string>
+    <string name="opcao_salvar_pdf">Salvar em PDF</string>
+    <string name="opcao_compartilhar">Compartilhar</string>
+    <string name="opcao_imprimir">Imprimir</string>
+    <string name="pdf_salvo">PDF salvo!</string>
+    <string name="erro_pdf">Erro ao gerar o PDF: %1$s</string>
 </resources>

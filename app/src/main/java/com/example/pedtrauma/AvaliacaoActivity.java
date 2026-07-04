@@ -49,19 +49,14 @@ public class AvaliacaoActivity extends AppCompatActivity {
     public static final String EXTRA_HORA_OCORRENCIA = "horaOcorrencia";
     public static final String EXTRA_HORA_AVALIACAO = "horaAvaliacao";
 
-    /** Pontos por opção: 1ª = +2, 2ª = +1, 3ª = -1. */
-    private static final int[] PONTOS = {2, 1, -1};
     private static final int SEM_RESPOSTA = -1;
-    private static final int TOTAL_PERGUNTAS = 6;
+    private static final int TOTAL_PERGUNTAS = Pts.PERGUNTAS.length;
     private static final int PAGINA_RESULTADO = TOTAL_PERGUNTAS; // 7ª página
-    private static final int LIMITE_PTS = 8;
-
-    private String[] perguntas;
-    private String[][] opcoes;
 
     private final int[] respostas = new int[TOTAL_PERGUNTAS];
     private Boolean exameImagem = null;
     private String achados = "";
+    private String observacoes = "";
     private boolean salvando = false;
 
     private ViewPager2 pager;
@@ -76,22 +71,6 @@ public class AvaliacaoActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        perguntas = new String[]{
-                "PESO DO PACIENTE?",
-                "VIA AÉREA",
-                "PRESSÃO ARTERIAL SISTÓLICA",
-                "SISTEMA NERVOSO CENTRAL",
-                "FERIDA ABERTA",
-                "ESQUELETO"
-        };
-        opcoes = new String[][]{
-                {"≥ 20 kg", "10 - 19 kg", "≤ 10 kg"},
-                {"Normal", "Mantida", "Não mantida"},
-                {"> 90 mmHg", "50 - 89 mmHg", "< 50 mmHg"},
-                {"Acordado", "Obnubilado ou perda de consciência", "Coma ou descerebração"},
-                {"Nenhuma", "Menor", "Maior ou penetrante"},
-                {"Nenhuma", "Fratura fechada", "Fratura aberta ou múltipla"}
-        };
         Arrays.fill(respostas, SEM_RESPOSTA);
 
         pager = findViewById(R.id.pagerPerguntas);
@@ -119,13 +98,13 @@ public class AvaliacaoActivity extends AppCompatActivity {
     private int pontuacao() {
         int total = 0;
         for (int r : respostas) {
-            if (r != SEM_RESPOSTA) total += PONTOS[r];
+            if (r != SEM_RESPOSTA) total += Pts.PONTOS[r];
         }
         return total;
     }
 
     private String interpretacao(int pts) {
-        return pts <= LIMITE_PTS
+        return pts <= Pts.LIMITE
                 ? getString(R.string.interpretacao_maior_potencial)
                 : getString(R.string.interpretacao_menor_potencial);
     }
@@ -197,6 +176,7 @@ public class AvaliacaoActivity extends AppCompatActivity {
         avaliacao.setInterpretacao(interpretacaoTexto);
         avaliacao.setExameImagem(exameImagem);
         avaliacao.setAchados(Boolean.TRUE.equals(exameImagem) ? achados : null);
+        avaliacao.setObservacoes(observacoes.trim().isEmpty() ? null : observacoes.trim());
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -291,12 +271,12 @@ public class AvaliacaoActivity extends AppCompatActivity {
         }
 
         void bind(int posicao) {
-            txtPergunta.setText(perguntas[posicao]);
+            txtPergunta.setText(Pts.PERGUNTAS[posicao]);
 
             grupo.setOnCheckedChangeListener(null);
             grupo.clearCheck();
             for (int i = 0; i < 3; i++) {
-                botoes[i].setText(opcoes[posicao][i]);
+                botoes[i].setText(Pts.OPCOES[posicao][i]);
                 botoes[i].setChecked(respostas[posicao] == i);
             }
 
@@ -317,7 +297,7 @@ public class AvaliacaoActivity extends AppCompatActivity {
         final TextView badge, txtInterpretacao;
         final RadioGroup grupoExame;
         final RadioButton exameSim, exameNao;
-        final EditText edtAchados;
+        final EditText edtAchados, edtObservacoes;
         final View layoutAviso;
         final Button btnSalvar;
         final ProgressBar progressSalvar;
@@ -330,6 +310,7 @@ public class AvaliacaoActivity extends AppCompatActivity {
             exameSim = item.findViewById(R.id.exameSim);
             exameNao = item.findViewById(R.id.exameNao);
             edtAchados = item.findViewById(R.id.edtAchados);
+            edtObservacoes = item.findViewById(R.id.edtObservacoes);
             layoutAviso = item.findViewById(R.id.layoutAviso);
             btnSalvar = item.findViewById(R.id.btnSalvarAvaliacao);
             progressSalvar = item.findViewById(R.id.progressSalvar);
@@ -339,6 +320,14 @@ public class AvaliacaoActivity extends AppCompatActivity {
                 @Override public void onTextChanged(CharSequence s, int a, int b, int c) { }
                 @Override public void afterTextChanged(Editable s) {
                     achados = s.toString();
+                }
+            });
+
+            edtObservacoes.addTextChangedListener(new TextWatcher() {
+                @Override public void beforeTextChanged(CharSequence s, int a, int b, int c) { }
+                @Override public void onTextChanged(CharSequence s, int a, int b, int c) { }
+                @Override public void afterTextChanged(Editable s) {
+                    observacoes = s.toString();
                 }
             });
 
@@ -353,11 +342,19 @@ public class AvaliacaoActivity extends AppCompatActivity {
                 // Classificação com cores: vermelho ≤ 8, azul > 8
                 badge.getBackground().setTint(ContextCompat.getColor(
                         AvaliacaoActivity.this,
-                        pts <= LIMITE_PTS ? R.color.vermelho_pedtrauma : R.color.azul_pedtrauma));
+                        pts <= Pts.LIMITE ? R.color.vermelho_pedtrauma : R.color.azul_pedtrauma));
                 txtInterpretacao.setText(interpretacao(pts));
             } else {
                 badge.setText(R.string.pontuacao_pendente);
                 txtInterpretacao.setText(R.string.erro_responda_tudo);
+            }
+
+            // Restaura os textos (a página é recriada ao navegar no carrossel)
+            if (!edtAchados.getText().toString().equals(achados)) {
+                edtAchados.setText(achados);
+            }
+            if (!edtObservacoes.getText().toString().equals(observacoes)) {
+                edtObservacoes.setText(observacoes);
             }
 
             grupoExame.setOnCheckedChangeListener(null);

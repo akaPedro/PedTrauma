@@ -139,6 +139,21 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
+        <EditText
+            android:id="@+id/edtObservacoes"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_caixa_texto"
+            android:gravity="top|start"
+            android:hint="@string/hint_observacoes"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine|textCapSentences"
+            android:padding="12dp"
+            android:textColor="@color/texto_escuro"
+            android:textColorHint="@color/texto_escuro"
+            android:textSize="15sp" />
+
         <Button
             android:id="@+id/btnSalvarAvaliacao"
             android:layout_width="match_parent"
