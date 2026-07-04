@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">PedTrauma</string>
+
+    <!-- Comuns -->
+    <string name="direitos_reservados">Direitos reservados a UESPI\nv. 0.1</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_senha">Senha</string>
+    <string name="btn_entrar">Entrar</string>
+
+    <!-- Login -->
+    <string name="nao_possui_cadastro">Não possui cadastro?</string>
+    <string name="btn_registrar">Registrar-se</string>
+
+    <!-- Cadastro -->
+    <string name="hint_nome">Nome</string>
+    <string name="hint_registro">Registro</string>
+    <string name="hint_cpf">Cpf</string>
+    <string name="confirme_sua_senha">Confirme sua senha</string>
+    <string name="desc_logo">Logo PedTrauma</string>
+
+    <!-- Mensagens -->
+    <string name="erro_campo_obrigatorio">Campo obrigatório</string>
+    <string name="erro_email_invalido">Email inválido</string>
+    <string name="erro_senha_curta">A senha deve ter no mínimo 6 caracteres</string>
+    <string name="erro_senhas_diferentes">As senhas não coincidem</string>
+    <string name="erro_cpf_invalido">CPF inválido</string>
+    <string name="erro_login">Email ou senha incorretos</string>
+    <string name="cadastro_sucesso">Cadastro realizado com sucesso!</string>
+    <string name="erro_cadastro">Erro ao cadastrar: %1$s</string>
+    <string name="erro_email_em_uso">Este email já está cadastrado</string>
+
+    <!-- Home (temporária) -->
+    <string name="bem_vindo">Bem-vindo(a), %1$s!</string>
+    <string name="btn_sair">Sair</string>
 </resources>

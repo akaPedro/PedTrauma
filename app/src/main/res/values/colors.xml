@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Paleta PedTrauma -->
+    <color name="azul_pedtrauma">#27489B</color>
+    <color name="vermelho_pedtrauma">#D42027</color>
+    <color name="fundo_cinza">#DBDBDB</color>
+    <color name="texto_escuro">#1A1A1A</color>
 </resources>

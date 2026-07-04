@@ -1,6 +1,9 @@
 package com.example.pedtrauma;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +11,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+/**
+ * Tela principal (após login).
+ * Por enquanto exibe o nome do usuário logado e um botão de sair,
+ * para testar o fluxo. Aqui entrarão os escores de trauma.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -20,5 +31,34 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        TextView tvBemVindo = findViewById(R.id.tvBemVindo);
+        Button btnSair = findViewById(R.id.btnSair);
+
+        carregarNomeUsuario(tvBemVindo);
+
+        btnSair.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
+    }
+
+    private void carregarNomeUsuario(TextView tvBemVindo) {
+        String uid = FirebaseAuth.getInstance().getUid();
+        if (uid == null) return;
+
+        FirebaseFirestore.getInstance()
+                .collection("usuarios").document(uid)
+                .get()
+                .addOnSuccessListener(doc -> {
+                    Usuario usuario = doc.toObject(Usuario.class);
+                    if (usuario != null && usuario.getNome() != null) {
+                        tvBemVindo.setText(getString(
+                                R.string.bem_vindo, usuario.getNome()));
+                    }
+                });
     }
 }
