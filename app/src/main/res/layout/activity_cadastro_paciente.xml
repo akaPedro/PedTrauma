@@ -29,7 +29,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:paddingStart="24dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="32dp">
 
             <EditText
                 android:id="@+id/edtNomePaciente"
@@ -39,14 +42,17 @@
                 android:backgroundTint="@color/texto_escuro"
                 android:hint="@string/hint_nome_paciente"
                 android:inputType="textPersonName|textCapWords"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
                 android:textColor="@color/texto_escuro"
                 android:textColorHint="@color/texto_escuro"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -55,19 +61,23 @@
                     android:layout_height="wrap_content"
                     android:text="@string/rotulo_idade"
                     android:textColor="@color/texto_escuro"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edtIdade"
-                    android:layout_width="80dp"
+                    android:layout_width="72dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="12dp"
                     android:backgroundTint="@color/texto_escuro"
                     android:gravity="center"
                     android:importantForAutofill="no"
                     android:inputType="number"
                     android:maxLength="2"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
                     android:textColor="@color/texto_escuro"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -75,14 +85,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/rotulo_sexo"
                 android:textColor="@color/texto_escuro"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="44dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_botao_azul"
@@ -94,10 +105,11 @@
                     android:layout_height="match_parent"
                     android:alpha="0.45"
                     android:gravity="center"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp"
                     android:text="@string/sexo_masculino"
                     android:textColor="@color/white"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <View
@@ -111,10 +123,11 @@
                     android:layout_height="match_parent"
                     android:alpha="0.45"
                     android:gravity="center"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp"
                     android:text="@string/sexo_feminino"
                     android:textColor="@color/white"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -122,27 +135,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/rotulo_tipo_trauma"
                 android:textColor="@color/texto_escuro"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/edtTipoTrauma"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="110dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/fundo_cartao"
+                android:background="@drawable/bg_caixa_texto"
                 android:gravity="top|start"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine|textCapSentences"
                 android:padding="12dp"
-                android:textColor="@color/texto_escuro" />
+                android:textColor="@color/texto_escuro"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="24dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -151,6 +166,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/rotulo_hora_ocorrencia"
                     android:textColor="@color/texto_escuro"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -160,7 +176,8 @@
                     android:layout_marginStart="8dp"
                     android:padding="8dp"
                     android:text="@string/hora_vazia"
-                    android:textColor="@color/texto_escuro"
+                    android:textColor="@color/azul_pedtrauma"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -176,6 +193,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/rotulo_hora_avaliacao"
                     android:textColor="@color/texto_escuro"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -185,7 +203,8 @@
                     android:layout_marginStart="8dp"
                     android:padding="8dp"
                     android:text="@string/hora_vazia"
-                    android:textColor="@color/texto_escuro"
+                    android:textColor="@color/azul_pedtrauma"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -195,6 +214,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/texto_escuro"
+                android:textSize="14sp"
                 android:visibility="gone" />
 
             <Button
@@ -202,13 +222,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="28dp"
                 android:background="@drawable/bg_botao_vermelho"
-                android:paddingStart="32dp"
-                android:paddingEnd="32dp"
+                android:paddingStart="40dp"
+                android:paddingEnd="40dp"
                 android:text="@string/btn_registrar_trauma"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <ProgressBar

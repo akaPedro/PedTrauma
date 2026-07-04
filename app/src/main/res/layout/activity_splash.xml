@@ -26,7 +26,7 @@
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:contentDescription="@string/desc_logo"
-        android:src="@drawable/canvas"
+        android:src="@drawable/logonormpng"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -31,7 +31,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:contentDescription="@string/desc_logo"
-            android:src="@drawable/canvas" />
+            android:src="@drawable/logpng" />
 
         <ImageView
             android:id="@+id/btnEditarFoto"

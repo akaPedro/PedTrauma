@@ -100,9 +100,9 @@
         <EditText
             android:id="@+id/edtAchados"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="110dp"
             android:layout_marginTop="12dp"
-            android:background="@color/fundo_cartao"
+            android:background="@drawable/bg_caixa_texto"
             android:gravity="top|start"
             android:hint="@string/hint_achados"
             android:importantForAutofill="no"

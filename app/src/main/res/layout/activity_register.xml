@@ -34,7 +34,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/desc_logo"
-            android:src="@drawable/canvas"
+            android:src="@drawable/logpng"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

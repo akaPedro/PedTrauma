@@ -2,7 +2,7 @@
 <resources>
     <!-- Paleta PedTrauma - modo escuro (mesmo matiz da paleta original,
          ajustado em luminosidade para contraste sobre fundo escuro) -->
-    <color name="azul_pedtrauma">#4C74D9</color>
+    <color name="azul_pedtrauma">#58A0EA</color>
     <color name="vermelho_pedtrauma">#E5484D</color>
     <color name="fundo_cinza">#15171C</color>
     <color name="texto_escuro">#ECEDEE</color>

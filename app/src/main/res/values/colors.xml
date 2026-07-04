@@ -3,12 +3,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- Paleta PedTrauma -->
-    <color name="azul_pedtrauma">#27489B</color>
+    <!-- Paleta PedTrauma (cores extraídas da logo:
+         azul da cruz #4593E5, azul-marinho do "Trauma" #123160, fundo #FAFAFA) -->
+    <color name="azul_pedtrauma">#4593E5</color>
     <color name="vermelho_pedtrauma">#D42027</color>
-    <color name="fundo_cinza">#DBDBDB</color>
-    <color name="texto_escuro">#1A1A1A</color>
-    <color name="fundo_cartao">#F2F2F2</color>
+    <color name="fundo_cinza">#FAFAFA</color>
+    <color name="texto_escuro">#123160</color>
+    <color name="fundo_cartao">#EEF2F8</color>
     <color name="verde_pedtrauma">#14604B</color>
     <color name="cinza_indicador">#9E9E9E</color>
 </resources>

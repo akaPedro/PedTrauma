@@ -34,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        Ui.aplicarInsets(findViewById(R.id.main));
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
