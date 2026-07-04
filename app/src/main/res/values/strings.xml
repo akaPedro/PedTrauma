@@ -73,6 +73,12 @@ mortalidade, além de prever a sobrevida, independentemente do mecanismo da les�
     <string name="erro_selecione_sexo">Selecione o sexo</string>
     <string name="erro_informe_horas">Informe as horas</string>
 
+    <!-- Pacientes (lista da barra lateral) -->
+    <string name="titulo_pacientes">Pacientes</string>
+    <string name="paciente_nome_idade">%1$s - %2$d anos</string>
+    <string name="ultima_avaliacao_resumo">Última avaliação: %1$s\nNota: %2$d - %3$s</string>
+    <string name="dica_nova_avaliacao">Toque em um paciente para registrar uma nova avaliação</string>
+
     <!-- Paciente registrado -->
     <string name="titulo_paciente_registrado">Paciente Registrado</string>
     <string name="rotulo_ultima_avaliacao">Ultima avaliação:</string>

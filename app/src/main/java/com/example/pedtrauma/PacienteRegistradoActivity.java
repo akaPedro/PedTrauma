@@ -32,12 +32,16 @@ import java.util.Map;
  */
 public class PacienteRegistradoActivity extends AppCompatActivity {
 
+    /** Extra opcional: pré-seleciona o paciente com este id. */
+    public static final String EXTRA_PACIENTE_ID = "pacienteId";
+
     private AutoCompleteTextView edtBuscaPaciente;
     private EditText edtTipoTrauma;
     private TextView txtHoraOcorrencia, txtHoraAvaliacao, txtTempoDecorrido, cartaoUltimaAvaliacao;
 
     private final List<String> ids = new ArrayList<>();
     private final List<Paciente> pacientes = new ArrayList<>();
+    private final List<String> rotulos = new ArrayList<>();
     /** Rótulo exibido no autocomplete -> índice na lista (trata nomes repetidos). */
     private final Map<String, Integer> indicePorRotulo = new HashMap<>();
     private int selecionado = -1;
@@ -68,6 +72,10 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
         findViewById(R.id.btnRegistrarTrauma).setOnClickListener(v -> registrar());
 
         restaurarEstado(savedInstanceState);
+        if (idPendenteRestauracao == null) {
+            // veio da lista de Pacientes com um paciente já escolhido
+            idPendenteRestauracao = getIntent().getStringExtra(EXTRA_PACIENTE_ID);
+        }
         carregarPacientes();
     }
 
@@ -103,7 +111,7 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
                     ids.clear();
                     pacientes.clear();
                     indicePorRotulo.clear();
-                    List<String> rotulos = new ArrayList<>();
+                    rotulos.clear();
                     for (QueryDocumentSnapshot doc : snapshot) {
                         Paciente p = doc.toObject(Paciente.class);
                         ids.add(doc.getId());
@@ -137,12 +145,13 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
                         mostrarUltimaAvaliacao();
                     });
 
-                    // Restaura a seleção após girar a tela
+                    // Restaura a seleção (rotação) ou aplica a pré-seleção (extra)
                     if (idPendenteRestauracao != null) {
                         int indice = ids.indexOf(idPendenteRestauracao);
                         idPendenteRestauracao = null;
                         if (indice >= 0) {
                             selecionado = indice;
+                            edtBuscaPaciente.setText(rotulos.get(indice), false);
                             mostrarUltimaAvaliacao();
                         }
                     }

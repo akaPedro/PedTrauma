@@ -61,6 +61,10 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
+            android:name=".PacientesActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".HistoricoActivity"
             android:exported="false" />
 

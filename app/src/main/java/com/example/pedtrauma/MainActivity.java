@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             if (id == R.id.itemHistorico) {
                 startActivity(new Intent(this, HistoricoActivity.class));
             } else if (id == R.id.itemPacientes) {
-                startActivity(new Intent(this, PacienteRegistradoActivity.class));
+                startActivity(new Intent(this, PacientesActivity.class));
             } else if (id == R.id.itemSobre) {
                 startActivity(new Intent(this, SobreActivity.class));
             } else if (id == R.id.itemSair) {
