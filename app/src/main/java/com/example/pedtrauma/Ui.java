@@ -16,11 +16,17 @@ final class Ui {
     private Ui() {
     }
 
-    /** Aplica as barras do sistema (status/navegação) como padding da raiz. */
+    /**
+     * Aplica as barras do sistema (status/navegação) como padding da raiz.
+     * Também considera o teclado (IME): quando aberto, o conteúdo é
+     * empurrado para cima para o campo em foco continuar visível.
+     */
     static void aplicarInsets(View raiz) {
         ViewCompat.setOnApplyWindowInsetsListener(raiz, (v, insets) -> {
             Insets barras = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(barras.left, barras.top, barras.right, barras.bottom);
+            Insets teclado = insets.getInsets(WindowInsetsCompat.Type.ime());
+            v.setPadding(barras.left, barras.top, barras.right,
+                    Math.max(barras.bottom, teclado.bottom));
             return insets;
         });
     }
