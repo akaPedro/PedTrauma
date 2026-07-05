@@ -10,6 +10,13 @@
     <!-- Login -->
     <string name="nao_possui_cadastro">Não possui cadastro?</string>
     <string name="btn_registrar">Registrar-se</string>
+    <string name="esqueci_senha">Esqueci minha senha</string>
+    <string name="redefinir_senha_titulo">Redefinir senha</string>
+    <string name="redefinir_senha_msg">Enviaremos um link de redefinição de senha para o seu e-mail.</string>
+    <string name="btn_enviar">Enviar</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="email_redefinicao_enviado">E-mail enviado! Verifique sua caixa de entrada (e o spam).</string>
+    <string name="erro_redefinicao">Erro ao enviar o e-mail: %1$s</string>
 
     <!-- Cadastro -->
     <string name="hint_nome">Nome</string>

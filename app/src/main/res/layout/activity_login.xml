@@ -73,12 +73,26 @@
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/tvEsqueciSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="48dp"
+        android:padding="4dp"
+        android:text="@string/esqueci_senha"
+        android:textColor="@color/azul_pedtrauma"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilSenha" />
+
     <Button
         android:id="@+id/btnEntrar"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="48dp"
         android:background="@drawable/bg_botao_azul"
         android:text="@string/btn_entrar"
@@ -87,7 +101,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tilSenha" />
+        app:layout_constraintTop_toBottomOf="@id/tvEsqueciSenha" />
 
     <TextView
         android:id="@+id/tvNaoPossuiCadastro"
