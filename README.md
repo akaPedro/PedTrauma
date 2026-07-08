@@ -109,6 +109,17 @@ git clone https://github.com/akaPedro/PedTrauma.git
 2. Adicione o seu `google-services.json` em `app/` (ver seção anterior).
 3. Sincronize o Gradle (**Sync Now**) e execute (**Run ▶**).
 
+## Distribuição para testes
+
+O app é distribuído aos testadores pelo **Firebase App Distribution**:
+
+1. Gere o APK no Android Studio: **Build → Build App Bundle(s) / APK(s) → Build APK(s)**
+   (o arquivo fica em `app/build/outputs/apk/debug/app-debug.apk`).
+2. No [Firebase Console](https://console.firebase.google.com) → **Release & Monitor → App Distribution**, envie o APK.
+3. Adicione os e-mails dos testadores (ou um grupo). Cada um recebe o convite por e-mail e instala pelo link; novas versões notificam os testadores automaticamente.
+
+> A cada nova versão distribuída, incremente o `versionCode` (e ajuste o `versionName`) em `app/build.gradle`.
+
 ## Fluxo do aplicativo
 
 ```
