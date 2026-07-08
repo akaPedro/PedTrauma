@@ -12,4 +12,6 @@
     <color name="fundo_cartao">#EEF2F8</color>
     <color name="verde_pedtrauma">#14604B</color>
     <color name="cinza_indicador">#9E9E9E</color>
+    <!-- Fundo do ícone do app (mesma cor do fundo da logo; não muda no tema escuro) -->
+    <color name="fundo_icone">#FAFAFA</color>
 </resources>

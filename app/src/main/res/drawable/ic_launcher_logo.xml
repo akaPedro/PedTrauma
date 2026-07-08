@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logo com margem para caber na zona segura do adaptive icon
+     (o launcher recorta o ícone em círculo/quadrado arredondado) -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/pedtraumalogoapp"
+    android:inset="18%" />
