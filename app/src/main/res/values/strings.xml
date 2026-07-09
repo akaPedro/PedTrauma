@@ -20,8 +20,8 @@
 
     <!-- Cadastro -->
     <string name="hint_nome">Nome</string>
-    <string name="hint_registro">Registro</string>
-    <string name="hint_cpf">Cpf</string>
+    <string name="hint_registro">Registro no conselho</string>
+    <string name="hint_cpf">CPF</string>
     <string name="confirme_sua_senha">Confirme sua senha</string>
     <string name="desc_logo">Logo PedTrauma</string>
 
@@ -64,6 +64,10 @@ mortalidade, além de prever a sobrevida, independentemente do mecanismo da les�
     <string name="desc_editar_foto">Editar foto</string>
     <string name="foto_atualizada">Foto de perfil atualizada!</string>
     <string name="erro_foto">Erro ao carregar a foto: %1$s</string>
+    <string name="confirmar_alteracoes_titulo">Confirmar alterações</string>
+    <string name="confirmar_alteracoes_msg">Digite sua senha para confirmar as alterações.</string>
+    <string name="erro_senha_incorreta">Senha incorreta</string>
+    <string name="verificacao_email_enviada">Enviamos um link para %1$s. O e-mail de acesso será trocado após você confirmar por lá.</string>
     <string name="desc_voltar">Voltar</string>
 
     <!-- Cadastro de paciente -->
@@ -107,7 +111,7 @@ mortalidade, além de prever a sobrevida, independentemente do mecanismo da les�
     <string name="opcao_nao">Não</string>
     <string name="hint_achados">Descreva os achados do exame</string>
     <string name="hint_observacoes">Observações (opcional)</string>
-    <string name="aviso_hemorragia">Atenção, o PTS ≤ 8, convulsões, fraturas e pouca idade pode indicar um quadro de hemorragia intracraniana.</string>
+    <string name="aviso_hemorragia">Atenção, caso a pontuação seja menor ou igual a 8, convulsões, fraturas e pouca idade pode indicar um quadro de hemorragia intracraniana.</string>
     <string name="btn_salvar_avaliacao">Salvar</string>
     <string name="confirmar_salvar">Deseja salvar esta avaliação?</string>
     <string name="avaliacao_salva">Avaliação salva!</string>
@@ -118,7 +122,7 @@ mortalidade, além de prever a sobrevida, independentemente do mecanismo da les�
 
     <!-- Sobre -->
     <string name="titulo_sobre">Sobre</string>
-    <string name="sobre_texto">O PedTrauma é um aplicativo desenvolvido para realizar o cálculo do Escore do Trauma Pediátrico (Pediatric Trauma Score – PTS). Esse escore é uma ferramenta amplamente utilizada na avaliação inicial de crianças vítimas de trauma, apresentando capacidade de predizer desfechos clínicos, como morbidade e mortalidade, além de estimar a probabilidade de sobrevida, independentemente do mecanismo da lesão.\n\nO PedTrauma é fruto de uma revisão sistemática da literatura desenvolvida pelo acadêmico de Enfermagem Francivaldo de Deus Coelho, sob orientação da Profa. Dra. Adriana da Silva Barros de Andrade, da Universidade Estadual do Piauí (UESPI), Campus Dra. Josefina Demes, Floriano–PI.\n\nPara mais informações, entre em contato com o autor correspondente pelo e-mail: francivaldodedeus05@gmail.com.</string>
+    <string name="sobre_texto">O PedTrauma é um aplicativo desenvolvido para realizar o cálculo do Escore do Trauma Pediátrico (Pediatric Trauma Score – PTS). Esse escore é uma ferramenta amplamente utilizada na avaliação inicial de crianças vítimas de trauma, apresentando capacidade de predizer desfechos clínicos, como morbidade e mortalidade, além de estimar a probabilidade de sobrevida, independentemente do mecanismo da lesão.\n\nO PedTrauma é fruto de um projeto de pesquisa desenvolvido no Programa de Incentivo a Bolsas de Iniciação Científica (PIBIC) desenvolvida pelo acadêmico de Enfermagem Francivaldo de Deus Coelho, sob orientação da Profa. Dra. Adriana da Silva Barros de Andrade, da Universidade Estadual do Piauí (UESPI), Campus Dra. Josefina Demes, Floriano–PI.\n\nPara mais informações, entre em contato com os autores correspondentes pelos e-mails: f.de.deus.c@aluno.uespi.br. \nadrianabarros@frn.uespi.br.</string>
     <string name="sobre_info">"• Versão do aplicativo: %1$s\n• Universidade Estadual do Piauí (UESPI)\n• Desenvolvedor do APP: Pedro Henrique de Sousa Jatobá e Samuel Oliveira da Silva\n• Orientadora do APP: Profa. Dra. Adriana da Silva Barros de Andrade\n• E-mail do desenvolvedor: phsousajatoba@gmail.com\n• Ano de desenvolvimento: 2026\n• Direitos autorais de imagem: ChatGPT\n• Conteúdo: Francivaldo de Deus Coelho"</string>
 
     <!-- Histórico -->
