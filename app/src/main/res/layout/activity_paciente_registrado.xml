@@ -158,6 +158,17 @@
                 android:textStyle="bold"
                 android:visibility="gone" />
 
+            <TextView
+                android:id="@+id/txtDicaContinuar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                android:text="@string/dica_continuar_caso"
+                android:textColor="@color/cinza_indicador"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
             <Button
                 android:id="@+id/btnRegistrarTrauma"
                 android:layout_width="wrap_content"

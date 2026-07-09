@@ -37,7 +37,9 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
 
     private AutoCompleteTextView edtBuscaPaciente;
     private EditText edtTipoTrauma;
-    private TextView txtHoraOcorrencia, txtHoraAvaliacao, txtTempoDecorrido, cartaoUltimaAvaliacao;
+    private TextView txtHoraOcorrencia, txtHoraAvaliacao, txtTempoDecorrido,
+            cartaoUltimaAvaliacao, txtDicaContinuar;
+    private boolean buscandoUltimoCaso = false;
 
     private final List<String> ids = new ArrayList<>();
     private final List<Paciente> pacientes = new ArrayList<>();
@@ -65,6 +67,10 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
         txtHoraAvaliacao = findViewById(R.id.txtHoraAvaliacao);
         txtTempoDecorrido = findViewById(R.id.txtTempoDecorrido);
         cartaoUltimaAvaliacao = findViewById(R.id.cartaoUltimaAvaliacao);
+        txtDicaContinuar = findViewById(R.id.txtDicaContinuar);
+
+        // Tocar no cartão continua a avaliação com o mesmo caso registrado
+        cartaoUltimaAvaliacao.setOnClickListener(v -> continuarCasoRegistrado());
 
         txtHoraOcorrencia.setOnClickListener(v -> escolherHora(true));
         txtHoraAvaliacao.setOnClickListener(v -> escolherHora(false));
@@ -161,6 +167,7 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
     private void mostrarUltimaAvaliacao() {
         if (selecionado < 0) {
             cartaoUltimaAvaliacao.setVisibility(View.GONE);
+            txtDicaContinuar.setVisibility(View.GONE);
             return;
         }
         Paciente p = pacientes.get(selecionado);
@@ -168,12 +175,70 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
 
         if (p.getUltimaNota() == null || p.getUltimaData() == null) {
             cartaoUltimaAvaliacao.setText(R.string.sem_avaliacao);
+            txtDicaContinuar.setVisibility(View.GONE);
             return;
         }
         String data = new SimpleDateFormat("dd/MM/yyyy - HH:mm", Locale.getDefault())
                 .format(p.getUltimaData());
         cartaoUltimaAvaliacao.setText(getString(R.string.cartao_paciente,
                 p.getNome(), p.getIdade(), data, p.getUltimaNota(), p.getUltimaInterpretacao()));
+        txtDicaContinuar.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * Continua a avaliação com o mesmo caso já registrado: busca a
+     * última avaliação do paciente e reaproveita o tipo de trauma e
+     * os horários, indo direto para o carrossel de perguntas.
+     */
+    private void continuarCasoRegistrado() {
+        if (selecionado < 0 || buscandoUltimoCaso) return;
+
+        Paciente p = pacientes.get(selecionado);
+        if (p.getUltimaNota() == null) {
+            Toast.makeText(this, R.string.sem_avaliacao, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String uid = FirebaseAuth.getInstance().getUid();
+        if (uid == null) return;
+        String pacienteId = ids.get(selecionado);
+
+        buscandoUltimoCaso = true;
+        FirebaseFirestore.getInstance()
+                .collection("usuarios").document(uid)
+                .collection("avaliacoes")
+                .whereEqualTo("pacienteId", pacienteId)
+                .get()
+                .addOnSuccessListener(snapshot -> {
+                    buscandoUltimoCaso = false;
+
+                    // a mais recente (ordenação local dispensa índice composto)
+                    Avaliacao ultima = null;
+                    for (QueryDocumentSnapshot doc : snapshot) {
+                        Avaliacao a = doc.toObject(Avaliacao.class);
+                        if (ultima == null || (a.getCriadoEm() != null
+                                && (ultima.getCriadoEm() == null
+                                || a.getCriadoEm().after(ultima.getCriadoEm())))) {
+                            ultima = a;
+                        }
+                    }
+                    if (ultima == null) {
+                        Toast.makeText(this, R.string.sem_avaliacao, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    Intent intent = new Intent(this, AvaliacaoActivity.class);
+                    intent.putExtra(AvaliacaoActivity.EXTRA_PACIENTE_ID, pacienteId);
+                    intent.putExtra(AvaliacaoActivity.EXTRA_PACIENTE_NOME, p.getNome());
+                    intent.putExtra(AvaliacaoActivity.EXTRA_PACIENTE_IDADE, p.getIdade());
+                    intent.putExtra(AvaliacaoActivity.EXTRA_SEXO, p.getSexo());
+                    intent.putExtra(AvaliacaoActivity.EXTRA_TIPO_TRAUMA, ultima.getTipoTrauma());
+                    intent.putExtra(AvaliacaoActivity.EXTRA_HORA_OCORRENCIA, ultima.getHoraOcorrencia());
+                    intent.putExtra(AvaliacaoActivity.EXTRA_HORA_AVALIACAO, ultima.getHoraAvaliacao());
+                    startActivity(intent);
+                    finish();
+                })
+                .addOnFailureListener(e -> buscandoUltimoCaso = false);
     }
 
     private void escolherHora(boolean ocorrencia) {
