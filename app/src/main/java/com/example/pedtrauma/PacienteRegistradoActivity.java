@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -175,6 +176,7 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
 
         if (p.getUltimaNota() == null || p.getUltimaData() == null) {
             cartaoUltimaAvaliacao.setText(R.string.sem_avaliacao);
+            pintarCartao(R.color.azul_pedtrauma);
             txtDicaContinuar.setVisibility(View.GONE);
             return;
         }
@@ -182,7 +184,15 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
                 .format(p.getUltimaData());
         cartaoUltimaAvaliacao.setText(getString(R.string.cartao_paciente,
                 p.getNome(), p.getIdade(), data, p.getUltimaNota(), p.getUltimaInterpretacao()));
+        // Cor conforme a classificação: vermelho PTS <= 8, azul PTS > 8
+        pintarCartao(p.getUltimaNota() <= Pts.LIMITE
+                ? R.color.vermelho_pedtrauma : R.color.azul_pedtrauma);
         txtDicaContinuar.setVisibility(View.VISIBLE);
+    }
+
+    private void pintarCartao(int corRes) {
+        cartaoUltimaAvaliacao.getBackground().mutate()
+                .setTint(ContextCompat.getColor(this, corRes));
     }
 
     /**
