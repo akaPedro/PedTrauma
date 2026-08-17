@@ -13,7 +13,10 @@ import java.util.Date;
 public class Paciente {
 
     private String nome;
+    /** Anos inteiros — mantido para compatibilidade com registros antigos. */
     private int idade;
+    /** Idade total em meses (fonte canônica, atende lactentes). */
+    private Integer idadeMeses;
     private String sexo;
 
     private Integer ultimaNota;
@@ -26,9 +29,10 @@ public class Paciente {
     public Paciente() {
     }
 
-    public Paciente(String nome, int idade, String sexo) {
+    public Paciente(String nome, int idadeMeses, String sexo) {
         this.nome = nome;
-        this.idade = idade;
+        this.idade = Idade.anosInteiros(idadeMeses);
+        this.idadeMeses = idadeMeses;
         this.sexo = sexo;
     }
 
@@ -37,6 +41,9 @@ public class Paciente {
 
     public int getIdade() { return idade; }
     public void setIdade(int idade) { this.idade = idade; }
+
+    public Integer getIdadeMeses() { return idadeMeses; }
+    public void setIdadeMeses(Integer idadeMeses) { this.idadeMeses = idadeMeses; }
 
     public String getSexo() { return sexo; }
     public void setSexo(String sexo) { this.sexo = sexo; }

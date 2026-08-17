@@ -27,10 +27,12 @@ public class CadastroPacienteActivity extends AppCompatActivity {
 
     private EditText edtNomePaciente, edtIdade, edtTipoTrauma;
     private TextView btnMasculino, btnFeminino;
+    private TextView btnAnos, btnMeses, txtIdadeResumo;
     private TextView txtHoraOcorrencia, txtHoraAvaliacao, txtTempoDecorrido;
     private ProgressBar progresso;
 
     private String sexoSelecionado = null;
+    private boolean idadeEmMeses = false;
     private String horaOcorrencia = null;
     private String horaAvaliacao = null;
 
@@ -48,6 +50,9 @@ public class CadastroPacienteActivity extends AppCompatActivity {
         edtTipoTrauma = findViewById(R.id.edtTipoTrauma);
         btnMasculino = findViewById(R.id.btnMasculino);
         btnFeminino = findViewById(R.id.btnFeminino);
+        btnAnos = findViewById(R.id.btnAnos);
+        btnMeses = findViewById(R.id.btnMeses);
+        txtIdadeResumo = findViewById(R.id.txtIdadeResumo);
         txtHoraOcorrencia = findViewById(R.id.txtHoraOcorrencia);
         txtHoraAvaliacao = findViewById(R.id.txtHoraAvaliacao);
         txtTempoDecorrido = findViewById(R.id.txtTempoDecorrido);
@@ -55,6 +60,16 @@ public class CadastroPacienteActivity extends AppCompatActivity {
 
         btnMasculino.setOnClickListener(v -> selecionarSexo(getString(R.string.sexo_masculino)));
         btnFeminino.setOnClickListener(v -> selecionarSexo(getString(R.string.sexo_feminino)));
+
+        btnAnos.setOnClickListener(v -> selecionarUnidade(false));
+        btnMeses.setOnClickListener(v -> selecionarUnidade(true));
+        edtIdade.addTextChangedListener(new android.text.TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int a, int b, int c) { }
+            @Override public void onTextChanged(CharSequence s, int a, int b, int c) { }
+            @Override public void afterTextChanged(android.text.Editable s) {
+                atualizarResumoIdade();
+            }
+        });
 
         txtHoraOcorrencia.setOnClickListener(v -> escolherHora(true));
         txtHoraAvaliacao.setOnClickListener(v -> escolherHora(false));
@@ -68,6 +83,7 @@ public class CadastroPacienteActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@androidx.annotation.NonNull Bundle estado) {
         super.onSaveInstanceState(estado);
         estado.putString("sexo", sexoSelecionado);
+        estado.putBoolean("idadeEmMeses", idadeEmMeses);
         estado.putString("horaOcorrencia", horaOcorrencia);
         estado.putString("horaAvaliacao", horaAvaliacao);
     }
@@ -76,6 +92,7 @@ public class CadastroPacienteActivity extends AppCompatActivity {
         if (estado == null) return;
         String sexo = estado.getString("sexo");
         if (sexo != null) selecionarSexo(sexo);
+        selecionarUnidade(estado.getBoolean("idadeEmMeses", false));
 
         horaOcorrencia = estado.getString("horaOcorrencia");
         horaAvaliacao = estado.getString("horaAvaliacao");
@@ -89,6 +106,33 @@ public class CadastroPacienteActivity extends AppCompatActivity {
         boolean masculino = sexo.equals(getString(R.string.sexo_masculino));
         btnMasculino.setAlpha(masculino ? 1f : 0.45f);
         btnFeminino.setAlpha(masculino ? 0.45f : 1f);
+    }
+
+    private void selecionarUnidade(boolean meses) {
+        idadeEmMeses = meses;
+        btnAnos.setAlpha(meses ? 0.45f : 1f);
+        btnMeses.setAlpha(meses ? 1f : 0.45f);
+        atualizarResumoIdade();
+    }
+
+    /** Total de meses digitado; 0 quando vazio ou fora da faixa. */
+    private int mesesInformados() {
+        String texto = edtIdade.getText().toString().replaceAll("[^0-9]", "");
+        if (TextUtils.isEmpty(texto)) return 0;
+        int valor = Integer.parseInt(texto);
+        if (valor <= 0) return 0;
+        int meses = idadeEmMeses ? valor : valor * 12;
+        return meses > Idade.MESES_MAXIMO ? 0 : meses;
+    }
+
+    private void atualizarResumoIdade() {
+        int meses = mesesInformados();
+        if (meses > 0) {
+            txtIdadeResumo.setText(Idade.formatar(this, meses));
+            txtIdadeResumo.setVisibility(View.VISIBLE);
+        } else {
+            txtIdadeResumo.setVisibility(View.GONE);
+        }
     }
 
     private void escolherHora(boolean ocorrencia) {
@@ -133,16 +177,16 @@ public class CadastroPacienteActivity extends AppCompatActivity {
 
     private void registrar() {
         String nome = edtNomePaciente.getText().toString().trim();
-        String idadeTexto = edtIdade.getText().toString().trim();
         String tipoTrauma = edtTipoTrauma.getText().toString().trim();
+        int meses = mesesInformados();
 
         if (TextUtils.isEmpty(nome)) {
             edtNomePaciente.setError(getString(R.string.erro_campo_obrigatorio));
             edtNomePaciente.requestFocus();
             return;
         }
-        if (TextUtils.isEmpty(idadeTexto)) {
-            edtIdade.setError(getString(R.string.erro_campo_obrigatorio));
+        if (meses <= 0) {
+            edtIdade.setError(getString(R.string.erro_idade_invalida));
             edtIdade.requestFocus();
             return;
         }
@@ -163,8 +207,7 @@ public class CadastroPacienteActivity extends AppCompatActivity {
         String uid = FirebaseAuth.getInstance().getUid();
         if (uid == null) return;
 
-        int idade = Integer.parseInt(idadeTexto);
-        Paciente paciente = new Paciente(nome, idade, sexoSelecionado);
+        Paciente paciente = new Paciente(nome, meses, sexoSelecionado);
 
         progresso.setVisibility(View.VISIBLE);
         FirebaseFirestore.getInstance()
@@ -173,7 +216,7 @@ public class CadastroPacienteActivity extends AppCompatActivity {
                 .add(paciente)
                 .addOnSuccessListener(ref -> {
                     progresso.setVisibility(View.GONE);
-                    abrirAvaliacao(ref.getId(), nome, idade, tipoTrauma);
+                    abrirAvaliacao(ref.getId(), nome, meses, tipoTrauma);
                 })
                 .addOnFailureListener(e -> {
                     progresso.setVisibility(View.GONE);
@@ -183,11 +226,11 @@ public class CadastroPacienteActivity extends AppCompatActivity {
                 });
     }
 
-    private void abrirAvaliacao(String pacienteId, String nome, int idade, String tipoTrauma) {
+    private void abrirAvaliacao(String pacienteId, String nome, int meses, String tipoTrauma) {
         Intent intent = new Intent(this, AvaliacaoActivity.class);
         intent.putExtra(AvaliacaoActivity.EXTRA_PACIENTE_ID, pacienteId);
         intent.putExtra(AvaliacaoActivity.EXTRA_PACIENTE_NOME, nome);
-        intent.putExtra(AvaliacaoActivity.EXTRA_PACIENTE_IDADE, idade);
+        intent.putExtra(AvaliacaoActivity.EXTRA_PACIENTE_IDADE_MESES, meses);
         intent.putExtra(AvaliacaoActivity.EXTRA_SEXO, sexoSelecionado);
         intent.putExtra(AvaliacaoActivity.EXTRA_TIPO_TRAUMA, tipoTrauma);
         intent.putExtra(AvaliacaoActivity.EXTRA_HORA_OCORRENCIA, horaOcorrencia);

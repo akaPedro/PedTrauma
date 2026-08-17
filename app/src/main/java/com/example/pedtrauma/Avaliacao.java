@@ -15,6 +15,7 @@ public class Avaliacao {
     private String pacienteId;
     private String pacienteNome;
     private int pacienteIdade;
+    private Integer pacienteIdadeMeses;
     private String sexo;
 
     private String tipoTrauma;
@@ -45,6 +46,11 @@ public class Avaliacao {
 
     public int getPacienteIdade() { return pacienteIdade; }
     public void setPacienteIdade(int pacienteIdade) { this.pacienteIdade = pacienteIdade; }
+
+    public Integer getPacienteIdadeMeses() { return pacienteIdadeMeses; }
+    public void setPacienteIdadeMeses(Integer pacienteIdadeMeses) {
+        this.pacienteIdadeMeses = pacienteIdadeMeses;
+    }
 
     public String getSexo() { return sexo; }
     public void setSexo(String sexo) { this.sexo = sexo; }

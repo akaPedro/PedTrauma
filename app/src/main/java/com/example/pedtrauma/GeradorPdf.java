@@ -78,7 +78,7 @@ final class GeradorPdf {
 
         secao("Dados do paciente");
         linha("Nome", a.getPacienteNome());
-        linha("Idade", a.getPacienteIdade() + " anos");
+        linha("Idade", Idade.formatar(contexto, a));
         linha("Sexo", a.getSexo());
 
         secao("Avaliação");

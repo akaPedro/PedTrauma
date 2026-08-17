@@ -127,7 +127,7 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
                         // Nomes repetidos ganham a idade (e um número) no rótulo
                         String rotulo = p.getNome();
                         if (indicePorRotulo.containsKey(rotulo)) {
-                            rotulo = p.getNome() + " - " + p.getIdade() + " anos";
+                            rotulo = p.getNome() + " - " + Idade.formatar(this, p);
                         }
                         int sequencia = 2;
                         while (indicePorRotulo.containsKey(rotulo)) {
@@ -183,7 +183,8 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
         String data = new SimpleDateFormat("dd/MM/yyyy - HH:mm", Locale.getDefault())
                 .format(p.getUltimaData());
         cartaoUltimaAvaliacao.setText(getString(R.string.cartao_paciente,
-                p.getNome(), p.getIdade(), data, p.getUltimaNota(), p.getUltimaInterpretacao()));
+                p.getNome(), Idade.formatar(this, p), data,
+                p.getUltimaNota(), p.getUltimaInterpretacao()));
         // Cor conforme a classificação: vermelho PTS <= 8, azul PTS > 8
         pintarCartao(p.getUltimaNota() <= Pts.LIMITE
                 ? R.color.vermelho_pedtrauma : R.color.azul_pedtrauma);
@@ -240,7 +241,8 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
                     Intent intent = new Intent(this, AvaliacaoActivity.class);
                     intent.putExtra(AvaliacaoActivity.EXTRA_PACIENTE_ID, pacienteId);
                     intent.putExtra(AvaliacaoActivity.EXTRA_PACIENTE_NOME, p.getNome());
-                    intent.putExtra(AvaliacaoActivity.EXTRA_PACIENTE_IDADE, p.getIdade());
+                    intent.putExtra(AvaliacaoActivity.EXTRA_PACIENTE_IDADE_MESES,
+                Idade.mesesTotais(p.getIdade(), p.getIdadeMeses()));
                     intent.putExtra(AvaliacaoActivity.EXTRA_SEXO, p.getSexo());
                     intent.putExtra(AvaliacaoActivity.EXTRA_TIPO_TRAUMA, ultima.getTipoTrauma());
                     intent.putExtra(AvaliacaoActivity.EXTRA_HORA_OCORRENCIA, ultima.getHoraOcorrencia());
@@ -297,7 +299,8 @@ public class PacienteRegistradoActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AvaliacaoActivity.class);
         intent.putExtra(AvaliacaoActivity.EXTRA_PACIENTE_ID, ids.get(selecionado));
         intent.putExtra(AvaliacaoActivity.EXTRA_PACIENTE_NOME, p.getNome());
-        intent.putExtra(AvaliacaoActivity.EXTRA_PACIENTE_IDADE, p.getIdade());
+        intent.putExtra(AvaliacaoActivity.EXTRA_PACIENTE_IDADE_MESES,
+                Idade.mesesTotais(p.getIdade(), p.getIdadeMeses()));
         intent.putExtra(AvaliacaoActivity.EXTRA_SEXO, p.getSexo());
         intent.putExtra(AvaliacaoActivity.EXTRA_TIPO_TRAUMA, tipoTrauma);
         intent.putExtra(AvaliacaoActivity.EXTRA_HORA_OCORRENCIA, horaOcorrencia);

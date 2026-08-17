@@ -127,7 +127,7 @@ public class PacientesActivity extends AppCompatActivity {
             Paciente p = pacientes.get(position);
 
             String texto = getString(R.string.paciente_nome_idade,
-                    p.getNome(), p.getIdade());
+                    p.getNome(), Idade.formatar(PacientesActivity.this, p));
             if (p.getUltimaNota() != null && p.getUltimaData() != null) {
                 String data = new SimpleDateFormat("dd/MM/yyyy - HH:mm",
                         Locale.getDefault()).format(p.getUltimaData());

@@ -43,7 +43,7 @@ public class AvaliacaoActivity extends AppCompatActivity {
 
     public static final String EXTRA_PACIENTE_ID = "pacienteId";
     public static final String EXTRA_PACIENTE_NOME = "pacienteNome";
-    public static final String EXTRA_PACIENTE_IDADE = "pacienteIdade";
+    public static final String EXTRA_PACIENTE_IDADE_MESES = "pacienteIdadeMeses";
     public static final String EXTRA_SEXO = "sexo";
     public static final String EXTRA_TIPO_TRAUMA = "tipoTrauma";
     public static final String EXTRA_HORA_OCORRENCIA = "horaOcorrencia";
@@ -185,7 +185,9 @@ public class AvaliacaoActivity extends AppCompatActivity {
         Avaliacao avaliacao = new Avaliacao();
         avaliacao.setPacienteId(i.getStringExtra(EXTRA_PACIENTE_ID));
         avaliacao.setPacienteNome(i.getStringExtra(EXTRA_PACIENTE_NOME));
-        avaliacao.setPacienteIdade(i.getIntExtra(EXTRA_PACIENTE_IDADE, 0));
+        int meses = i.getIntExtra(EXTRA_PACIENTE_IDADE_MESES, 0);
+        avaliacao.setPacienteIdade(Idade.anosInteiros(meses));
+        avaliacao.setPacienteIdadeMeses(meses);
         avaliacao.setSexo(i.getStringExtra(EXTRA_SEXO));
         avaliacao.setTipoTrauma(i.getStringExtra(EXTRA_TIPO_TRAUMA));
         avaliacao.setHoraOcorrencia(i.getStringExtra(EXTRA_HORA_OCORRENCIA));

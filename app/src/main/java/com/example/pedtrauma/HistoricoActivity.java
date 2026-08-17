@@ -225,7 +225,7 @@ public class HistoricoActivity extends AppCompatActivity {
                     : new SimpleDateFormat("dd/MM/yyyy - HH:mm", Locale.getDefault())
                             .format(a.getCriadoEm());
             holder.texto.setText(getString(R.string.cartao_paciente,
-                    a.getPacienteNome(), a.getPacienteIdade(), data,
+                    a.getPacienteNome(), Idade.formatar(HistoricoActivity.this, a), data,
                     a.getPontuacao(), a.getInterpretacao()));
             holder.itemView.setOnClickListener(v -> {
                 int pos = holder.getBindingAdapterPosition();
