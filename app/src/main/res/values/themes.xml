@@ -20,12 +20,16 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <!-- Campo de senha com sublinhado e ícone de visibilidade (olho) -->
-    <style name="CampoSenha" parent="Widget.Material3.TextInputLayout.FilledBox">
+    <!-- Base dos campos de login: mesma caixa para e-mail e senha -->
+    <style name="CampoLogin" parent="Widget.Material3.TextInputLayout.FilledBox">
         <item name="boxBackgroundColor">@android:color/transparent</item>
         <item name="boxStrokeColor">@color/texto_escuro</item>
+        <item name="hintEnabled">false</item>
+    </style>
+
+    <!-- Campo de senha: a base + o ícone de visibilidade (olho) -->
+    <style name="CampoSenha" parent="CampoLogin">
         <item name="endIconMode">password_toggle</item>
         <item name="endIconTint">@color/texto_escuro</item>
-        <item name="hintEnabled">false</item>
     </style>
 </resources>
