@@ -26,33 +26,86 @@
             app:titleCentered="true"
             app:titleTextColor="@color/white" />
 
-        <Button
-            android:id="@+id/btnNovoPaciente"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="32dp"
-            android:background="@drawable/bg_botao_azul"
-            android:text="@string/btn_novo_paciente"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-        <Button
-            android:id="@+id/btnPacienteRegistrado"
-            android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:background="@drawable/bg_botao_azul"
-            android:text="@string/btn_paciente_registrado"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="32dp">
+
+                <Button
+                    android:id="@+id/btnNovoPaciente"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/bg_botao_azul"
+                    android:text="@string/btn_novo_paciente"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnPacienteRegistrado"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/bg_botao_azul"
+                    android:text="@string/btn_paciente_registrado"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Atalho para reavaliar: as três avaliações mais recentes -->
+                <LinearLayout
+                    android:id="@+id/secaoUltimas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/bg_secao"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/ultimas_avaliacoes"
+                        android:textColor="@color/azul_pedtrauma"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="12dp"
+                        android:gravity="center"
+                        android:text="@string/dica_reavaliar"
+                        android:textColor="@color/cinza_indicador"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:id="@+id/listaUltimas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 

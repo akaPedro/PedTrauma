@@ -5,18 +5,28 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  * Tela principal (após login).
@@ -54,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         carregarFotoPerfil(); // atualiza ao voltar da tela de Perfil
+        carregarUltimasAvaliacoes();
     }
 
     /** Mostra a foto do usuário no ícone de perfil da toolbar. */
@@ -129,6 +140,65 @@ public class MainActivity extends AppCompatActivity {
                 .setOnClickListener(v -> dialogo.dismiss());
 
         dialogo.show();
+    }
+
+    /** Busca as três avaliações mais recentes para o atalho de reavaliação. */
+    private void carregarUltimasAvaliacoes() {
+        String uid = FirebaseAuth.getInstance().getUid();
+        if (uid == null) return;
+
+        FirebaseFirestore.getInstance()
+                .collection("usuarios").document(uid)
+                .collection("avaliacoes")
+                .orderBy("criadoEm", Query.Direction.DESCENDING)
+                .limit(3)
+                .get()
+                .addOnSuccessListener(this::mostrarUltimasAvaliacoes);
+    }
+
+    private void mostrarUltimasAvaliacoes(QuerySnapshot snapshot) {
+        View secao = findViewById(R.id.secaoUltimas);
+        LinearLayout lista = findViewById(R.id.listaUltimas);
+        lista.removeAllViews();
+
+        // Sem avaliações, a seção nem aparece
+        if (snapshot.isEmpty()) {
+            secao.setVisibility(View.GONE);
+            return;
+        }
+        secao.setVisibility(View.VISIBLE);
+
+        LayoutInflater inflater = getLayoutInflater();
+        SimpleDateFormat formato =
+                new SimpleDateFormat("dd/MM/yyyy - HH:mm", Locale.getDefault());
+
+        for (QueryDocumentSnapshot documento : snapshot) {
+            Avaliacao a = documento.toObject(Avaliacao.class);
+            View item = inflater.inflate(R.layout.item_ultima_avaliacao, lista, false);
+
+            TextView txtNomeIdade = item.findViewById(R.id.txtNomeIdade);
+            TextView txtData = item.findViewById(R.id.txtData);
+            TextView txtNota = item.findViewById(R.id.txtNota);
+
+            txtNomeIdade.setText(getString(R.string.paciente_nome_idade,
+                    a.getPacienteNome(), Idade.formatar(this, a)));
+            txtData.setText(a.getCriadoEm() == null ? "" : formato.format(a.getCriadoEm()));
+            txtNota.setText(String.valueOf(a.getPontuacao()));
+            // Nota colorida pela classificação: vermelho <= 8, azul > 8
+            txtNota.getBackground().mutate().setTint(ContextCompat.getColor(this,
+                    a.getPontuacao() <= Pts.LIMITE
+                            ? R.color.vermelho_pedtrauma : R.color.azul_pedtrauma));
+
+            String pacienteId = a.getPacienteId();
+            item.setOnClickListener(v -> {
+                if (pacienteId == null) return;
+                Intent intent = new Intent(this, PacienteRegistradoActivity.class);
+                intent.putExtra(PacienteRegistradoActivity.EXTRA_PACIENTE_ID, pacienteId);
+                startActivity(intent);
+            });
+
+            lista.addView(item);
+        }
     }
 
     private void sair() {

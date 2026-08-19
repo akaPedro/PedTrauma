@@ -40,6 +40,8 @@
     <string name="btn_sair">Sair</string>
     <string name="btn_novo_paciente">Novo Paciente</string>
     <string name="btn_paciente_registrado">Paciente Registrado</string>
+    <string name="ultimas_avaliacoes">Últimas avaliações</string>
+    <string name="dica_reavaliar">Toque para reavaliar o paciente</string>
     <string name="desc_menu">Abrir menu</string>
     <string name="desc_perfil">Abrir perfil</string>
 
