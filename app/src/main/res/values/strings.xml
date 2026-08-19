@@ -2,7 +2,7 @@
     <string name="app_name">PedTrauma</string>
 
     <!-- Comuns -->
-    <string name="direitos_reservados">Direitos reservados a UESPI\nv. 0.2</string>
+    <string name="direitos_reservados">Direitos reservados a UESPI\nv. 0.3</string>
     <string name="hint_email">Email</string>
     <string name="hint_senha">Senha</string>
     <string name="btn_entrar">Entrar</string>
